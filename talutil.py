@@ -106,7 +106,7 @@ def FastaIterator(handle, title2ids = fasta_title_handler):
             line = handle.readline()
         
         #Return the record and then continue...
-        yield SeqRecord(Seq(string.join(lines, ''), alphabet), id = id, name = name, description = descr)
+        yield SeqRecord(Seq(str.join(lines, ''), alphabet), id = id, name = name, description = descr)
 
 def create_logger(logFilepath):
     
