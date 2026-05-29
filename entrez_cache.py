@@ -3,7 +3,8 @@ import uuid
 import time
 import os
 import tempfile
-from urllib.error import HTTPErrorimport math
+from urllib.error import HTTPError
+import math
 from Bio import Entrez, SeqIO
 from talconfig import BASE_DIR, REDIS_SERVER_HOSTNAME, REDIS_SERVER_PORT
 from talutil import TaskError
