@@ -5,7 +5,7 @@
 from talconfig import BASE_DIR, GENOME_FILE, PROMOTEROME_FILE, VALID_GENOME_ORGANISMS, VALID_PROMOTEROME_ORGANISMS, OFFTARGET_COUNTING_SIZE_LIMIT
 from talutil import validate_options_handler, OptParser, FastaIterator, create_logger, check_fasta_pasta, OptionObject, TaskError, reverseComplement, Conditional
 from entrez_cache import CachedEntrezFile
-
+from functools import reduce
 celery_found = True
 try:
     from celery.task import task
