@@ -56,7 +56,7 @@ class BindingSite:
         
         self.re_sites = ""
 
-with open(BASE_DIR + "/talent/re_dict_dump", "rb") as re_dict_file:
+with open("/content/talent_tools/re_dict_dump", "rb") as re_dict_file:
     NEB_RE_sites = pickle.load(re_dict_file)
 
 streubel_at_streak_re = re.compile('[AT]{6,}')
