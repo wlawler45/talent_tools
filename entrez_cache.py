@@ -3,8 +3,7 @@ import uuid
 import time
 import os
 import tempfile
-import urllib2
-import math
+from urllib.error import HTTPErrorimport math
 from Bio import Entrez, SeqIO
 from talconfig import BASE_DIR, REDIS_SERVER_HOSTNAME, REDIS_SERVER_PORT
 from talutil import TaskError
@@ -15,7 +14,7 @@ try:
 except ImportError:
     redis_found = False
 
-Entrez.email = "6e6a62393840636f726e656c6c2e656475".decode("hex")
+Entrez.email = bytes.fromhex("6e6a62393840636f726e656c6c2e656475").decode("utf-8")
 Entrez.tool = "https://tale-nt.cac.cornell.edu"
 
 def _ncbi_search_assemblies(cached_file, logger, assembly_id):
@@ -104,7 +103,8 @@ class BaseCachedEntrezFile(object):
                 
                 logger("Nucleotide sequence for ID located, downloading now")
             
-        except (IOError, urllib2.HTTPError):
+        # new
+        except (IOError, HTTPError):
             raise TaskError("Invalid NCBI ID provided")
 
 if redis_found:
@@ -337,7 +337,7 @@ else:
             try:
                 
                 fetch_handle = Entrez.efetch(db="nucleotide", id=self.nuc_seq_ids, rettype="fasta", retmode="text")
-                self.file = tempfile.NamedTemporaryFile()
+                self.file = tempfile.NamedTemporaryFile(mode='w+', suffix='.fasta')
                 
                 for i in range(int(math.ceil(float(len(self.nuc_seq_ids)) / 5000))):
                     
