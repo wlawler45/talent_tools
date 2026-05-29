@@ -3,7 +3,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
 
 import string
-import urllib
+from urllib.request import urlopen
 import sys
 from datetime import datetime
 from optparse import OptionParser
@@ -22,7 +22,7 @@ class TaskError(ValueError):
 
 def task_on_success(kwargs):
     if "nodeID" in kwargs:
-        urllib.urlopen(DRUPAL_CALLBACK_URL + str(kwargs['nodeID']) + "/0")
+        urlopen(DRUPAL_CALLBACK_URL + str(kwargs['nodeID']) + "/0")
 
 def task_on_error(exc, kwargs):
     logger = create_logger(kwargs['logFilepath'])
@@ -35,7 +35,7 @@ def task_on_error(exc, kwargs):
         logger("Internal error occurred. Please try again later.")
     
     if "nodeID" in kwargs:
-        urllib.urlopen(DRUPAL_CALLBACK_URL + str(kwargs['nodeID']) + "/1")
+        urlopen(DRUPAL_CALLBACK_URL + str(kwargs['nodeID']) + "/1")
 
 if celery_found:
     class BaseTask(Task):
