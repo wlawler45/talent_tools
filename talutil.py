@@ -117,7 +117,7 @@ def create_logger(logFilepath):
         
     else:
         def logger(message):
-            print "[%s] %s" % (datetime.now().ctime(), message)
+            print("[%s] %s" % (datetime.now().ctime(), message))
     
     return logger
 
