@@ -18,7 +18,7 @@ import re
 import math
 import pickle
 import os
-from itertools import ifilterfalse
+from itertools import filterfalse
 
 tfcount_found = True
 try:
@@ -475,7 +475,7 @@ def RunFindTALTask(options):
         
         
         if options.streubel:
-            binding_sites[:] = list(ifilterfalse(filterStreubel, binding_sites))
+            binding_sites[:] = list(filterfalse(filterStreubel, binding_sites))
         
         if options.check_offtargets:
             
